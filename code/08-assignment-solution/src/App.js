@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import NewExpense from './components/NewExpense/NewExpense';
+import ExpenseForm from './components/NewExpense/ExpenseForm';
 import Expenses from './components/Expenses/Expenses';
 
 const App = () => {
-  const expenses = [
+  const stubExpenseData = [
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -25,22 +25,18 @@ const App = () => {
       date: new Date(2021, 5, 12),
     },
   ];
+  const [expenses, setExpenses] = useState(stubExpenseData);
 
-  const addExpenseHandler = expense => {
-    console.log('In App.js');
-    console.log(expense);
+  const addExpenseHandler = (expense) => {
+    console.log('hi')
+    setExpenses(prevState => [...prevState, expense])
   };
 
-  // return React.createElement(
-  //   'div',
-  //   {},
-  //   React.createElement('h2', {}, "Let's get started!"),
-  //   React.createElement(Expenses, { items: expenses })
-  // );
-
+  
+  console.log(expenses)
   return (
     <div>
-      <NewExpense onAddExpense={addExpenseHandler} />
+      <ExpenseForm handleFormSubmit={addExpenseHandler} />
       <Expenses items={expenses} />
     </div>
   );
